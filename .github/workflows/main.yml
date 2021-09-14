@@ -7,10 +7,12 @@ on:
       - develop
       - master
     paths:
-    - 'kube-shell/**'
+      - 'kube-shell/**'
   pull_request:
+    branches-ignore:
+      - master
     paths:
-    - 'kube-shell/**'
+      - 'kube-shell/**'
 
 env: 
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
