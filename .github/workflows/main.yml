@@ -9,8 +9,8 @@ on:
     paths:
       - 'kube-shell/**'
   pull_request:
-    branches-ignore:
-      - master
+    branches:
+      - develop
     paths:
       - 'kube-shell/**'
 
