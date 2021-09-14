@@ -27,7 +27,6 @@ docker_manifest_create_and_push()
   docker manifest push $2
 }
 
-
 docker_image_build_and_push amd64  amd64/alpine:latest   ${KUBERNETES_RELEASE} ${REPO} $(dirname $0)/.
 docker_image_build_and_push arm64  arm64v8/alpine:latest ${KUBERNETES_RELEASE} ${REPO} $(dirname $0)/.
 docker_image_build_and_push arm    arm32v7/alpine:latest ${KUBERNETES_RELEASE} ${REPO} $(dirname $0)/.
