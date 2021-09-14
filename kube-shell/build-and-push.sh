@@ -12,9 +12,9 @@ docker_image_build_and_push()
     --build-arg ALPINE=${2?required} \
     --build-arg KUBERNETES_RELEASE=${3?required} \
     --platform linux/${1} \
-    --tag ${4?required}:${3}-${1} \
+    --tag ${4?required}:${TAG}-${3}-${1} \
   ${5?required}
-  docker image push ${4?required}:${3}-${1}
+  docker image push ${4?required}:${TAG}-${3}-${1}
 }
 
 docker_manifest_create_and_push()
