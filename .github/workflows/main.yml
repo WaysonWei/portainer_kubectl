@@ -3,6 +3,11 @@ name: Build kubectl docker image to Portainer CI & Portainer
 
 on:
   push:
+    branches:
+      - develop
+      - master
+    paths:
+    - 'kube-shell/**'
   pull_request:
     paths:
     - 'kube-shell/**'
