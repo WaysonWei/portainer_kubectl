@@ -1,27 +1,22 @@
-# This is a basic workflow to help you get started with Actions
+# This is a basic workflow to build amd64/arm64 kubectl image for portainer
 
-name: build
+name: Build kubectl docker image to Portainer CI & Portainer
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: main
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  [push, pull_request]:
+    branches: 
+    - [develop, master]
+    paths:
+    - 'kube-shell/**'
+env: 
+  GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout code
         uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
       # https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -31,11 +26,20 @@ jobs:
       - name: login to docker hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # Runs a set of commands using the runners shell
-      - name: build the image
+      - name: build the image to portainer ci
+        if: ${{ github.ref == 'refs/heads/develop'}}
         run: |
-          #make the script executeable 
-          chmod +x "${GITHUB_WORKSPACE}/.github/build-and-push.sh"
+          # make the script executeable 
+          chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/.github/build-and-push.sh"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainerci pr$GITHUB_PR_NUMBER"
+
+      - name: build the image to portainer release
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push'}}
+        run: |
+          # make the script executeable 
+          chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
+
+          # run the script
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainer latest"
