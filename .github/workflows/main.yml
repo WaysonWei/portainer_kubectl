@@ -1,5 +1,4 @@
 # This is a basic workflow to build amd64/arm64 kubectl image for portainer
-
 name: Build kubectl docker image to Portainer CI & Portainer
 
 on:
@@ -7,10 +6,13 @@ on:
     branches:
     - develop
     - master
+    pull_request:
+    - develop
+    - master
     paths:
     - '.github/workflows/**'
 env: 
-  GITHUB_PR_NUMBER: '123'
+  GITHUB_PR_NUMBER: '888'
 jobs:
   build:
     runs-on: ubuntu-latest
