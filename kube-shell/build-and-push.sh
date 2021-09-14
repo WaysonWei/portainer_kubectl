@@ -31,4 +31,4 @@ docker_image_build_and_push amd64  amd64/alpine:latest   ${TAG} ${KUBERNETES_REL
 docker_image_build_and_push arm64  arm64v8/alpine:latest ${TAG} ${KUBERNETES_RELEASE} ${REPO} $(dirname $0)/.
 docker_image_build_and_push arm    arm32v7/alpine:latest ${TAG} ${KUBERNETES_RELEASE} ${REPO} $(dirname $0)/.
 
-docker_manifest_create_and_push ${REPO}:${KUBERNETES_RELEASE} ${REPO}:${TAG} 
+docker_manifest_create_and_push ${REPO}:${TAG}-${KUBERNETES_RELEASE} ${REPO}:${TAG} 
