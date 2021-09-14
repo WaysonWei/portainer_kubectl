@@ -7,8 +7,8 @@ on:
     branches:
     - develop
     - master
-  paths:
-  - 'kube-shell/**'
+    paths:
+    - 'kube-shell/**'
 env: 
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 jobs:
