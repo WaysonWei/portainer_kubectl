@@ -6,9 +6,8 @@ on:
   push:
     branches:
     - develop
-    - master
     paths:
-    - 'kube-shell/**'
+    - './github/workflows/**'
 env: 
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 jobs:
