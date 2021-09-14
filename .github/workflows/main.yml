@@ -47,7 +47,7 @@ jobs:
           # run the script
           "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 developlatest
 
-        - name: build the image to portainer release
+      - name: build the image to portainer release
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           # make the script executeable 
