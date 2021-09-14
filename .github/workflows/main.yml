@@ -3,19 +3,10 @@ name: Build kubectl docker image to Portainer CI & Portainer
 
 on:
   push:
-    branches:
-    - develop
-    - master
-    paths:
-    - 'kube-shell/**'
-    
   pull_request:
-    branches:
-    - develop
-    - master
     paths:
     - 'kube-shell/**'
-    types: [opened, synchronize, reopened]
+
 env: 
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 jobs:
@@ -34,8 +25,7 @@ jobs:
       - name: login to docker hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: build the image to portainer ci ${{ github.ref }}
-        if: ${{ github.ref == 'refs/heads/develop'}}
+      - name: build the image to portainer ci
         run: |
           # make the script executeable 
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
