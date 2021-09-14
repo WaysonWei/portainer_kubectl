@@ -26,6 +26,7 @@ RUN curl -L https://get.helm.sh/helm-${HELM_VERSION}-linux-${ARCH}.tar.gz | tar 
 #     mv ./k9s /usr/local/bin/k9s
 
 # Linux user permissions
+
 RUN echo 'shell:x:1000:1000:shell,,,:/home/shell:/bin/bash' > /etc/passwd && \
     echo 'shell:x:1000:' > /etc/group && \
     mkdir /home/shell && \
