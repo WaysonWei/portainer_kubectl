@@ -33,13 +33,13 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainerci pr$GITHUB_PR_NUMBER"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh beos2020 pr$GITHUB_PR_NUMBER"
 
       - name: build the image to portainer release
-        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push'}}
+        if: ${{ github.ref == 'refs/heads/master' && github.event.pull_merged == true}}
         run: |
           # make the script executeable 
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainer latest"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh beos2020 latest"
