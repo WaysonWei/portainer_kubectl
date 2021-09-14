@@ -48,5 +48,4 @@ exec bash' >> /usr/local/bin/welcome && \
 
 USER 1000
 WORKDIR /home/shell
-
 CMD ["welcome"]
