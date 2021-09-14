@@ -1,4 +1,4 @@
-name: mybuild
+name: mybuild2
 
 on:
   push:
