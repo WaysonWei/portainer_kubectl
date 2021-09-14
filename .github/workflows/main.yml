@@ -42,4 +42,4 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh beos2020 $GITHUB_PR_NUMBER"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 $GITHUB_PR_NUMBER
