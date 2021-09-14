@@ -1,12 +1,10 @@
-# This is a basic workflow to build amd64/arm64 kubectl image for portainer
-
-name: Build kubectl docker image to Portainer CI & Portainer
+name: "Build kubectl docker image to Portainer CI & Portainer"
 
 on:
   push:
     branches:
-    - develop
-    - master
+    - 'develop'
+    - 'master'
     paths:
     - 'kube-shell/**'
 env: 
