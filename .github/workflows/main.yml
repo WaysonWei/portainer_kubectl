@@ -3,8 +3,8 @@ name: Build kubectl docker image to Portainer CI & Portainer
 on:
   push:
     branches:
-    - develop
-    - master
+    - 'develop'
+    - 'master'
     paths:
     - 'kube-shell/**'
 env: 
