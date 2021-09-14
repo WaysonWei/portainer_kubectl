@@ -40,7 +40,7 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 pr$GITHUB_PR_NUMBER"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 pr$GITHUB_PR_NUMBER
 
       - name: build the image to portainer release
         if: ${{ github.ref == 'refs/heads/master' && github.event.pull_request.merged == true}}
