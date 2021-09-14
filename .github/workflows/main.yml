@@ -3,13 +3,12 @@
 name: Build kubectl docker image to Portainer CI & Portainer
 
 on:
-  [push, pull_request]:
-    branches: 
-    - [develop, master]
-    paths:
-    - 'kube-shell/**'
+  push:
+    branches:
+    - develop
+    - master
 env: 
-  GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+  GITHUB_PR_NUMBER: '123'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,13 +32,13 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainerci pr$GITHUB_PR_NUMBER"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 latest
 
       - name: build the image to portainer release
-        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push'}}
+        if: ${{ github.ref == 'refs/heads/master'}}
         run: |
           # make the script executeable 
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
 
           # run the script
-          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh portainer latest"
+          "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh beos2020 $GITHUB_PR_NUMBER"
