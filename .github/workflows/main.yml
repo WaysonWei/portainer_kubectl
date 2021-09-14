@@ -2,18 +2,12 @@
 name: Build kubectl docker image to Portainer CI & Portainer
 
 on:
-  push:
-    branches:
-    - develop
-    - master
-    paths:
-    - 'kube-shell/**'
   pull_request:
     branches:
     - develop
     - master
     paths:
-    - '.kube-shell/**'
+    - 'kube-shell/**'
 env: 
   GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
 jobs:
@@ -33,7 +27,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: build the image to portainer ci
-        if: ${{ github.ref == 'refs/heads/develop'}}
+        if: ${{ github.ref == 'refs/heads/develop' && github.event.pull_request.merged == false}}
         run: |
           # make the script executeable 
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
@@ -42,7 +36,7 @@ jobs:
           "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh" beos2020 pr$GITHUB_PR_NUMBER"
 
       - name: build the image to portainer release
-        if: ${{ github.ref == 'refs/heads/master'}}
+        if: ${{ github.ref == 'refs/heads/master' && github.event.pull_request.merged == true}}
         run: |
           # make the script executeable 
           chmod +x "${GITHUB_WORKSPACE}/kube-shell/build-and-push.sh"
